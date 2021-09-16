@@ -1,10 +1,30 @@
 /**
  * Adds 16*16 grid of square divs to DOM
  */
-function makeGrid() {
+function makeGrid(numSquares) {
+  // Access CSS variables for grid columns and rows
+  const htmlStyles = window.getComputedStyle(document.querySelector('html'));
+
+  // Variables to set number of rows and columns in grid
+  let rowNum, colNum;
+
+  // Update variables if input is given
+  if (numSquares && typeof (numSquares) === 'number' &&
+    numSquares > 0 && numSquares <= 100
+  ) {
+    rowNum = numSquares;
+    colNum = numSquares;
+    document.documentElement.style.setProperty('--rowNum', numSquares);
+    document.documentElement.style.setProperty('--colNum', numSquares);
+  } else {
+    // Use value of CSS variables for grid columns and rows
+    rowNum = parseInt(htmlStyles.getPropertyValue('--rowNum'));
+    colNum = parseInt(htmlStyles.getPropertyValue('--colNum'));
+  }
+
   const divSketch = document.querySelector('#container-sketch');
-  for (let i = 0; i < 16; i++) {
-    for (let j = 0; j < 16; j++) {
+  for (let i = 0; i < rowNum; i++) {
+    for (let j = 0; j < colNum; j++) {
       // Create square div
       const divSquare = document.createElement('div');
       divSquare.classList.add('grid-square');
@@ -38,7 +58,10 @@ function resetGrid() {
   while (divSketch.firstChild) {
     divSketch.removeChild(divSketch.firstChild);
   }
-  makeGrid();
+  // Get input for number of squares per side for new grid
+  const numSquares = parseInt(prompt("How many squares per side?"));
+
+  makeGrid(numSquares);
 }
 
 /**
@@ -46,7 +69,10 @@ function resetGrid() {
  */
 function initialiseEvents() {
   const btnReset = document.querySelector('#btn-reset');
-  btnReset.addEventListener('click', (e) => {e.preventDefault(); resetGrid()});
+  btnReset.addEventListener('click', (e) => {
+    e.preventDefault();
+    resetGrid()
+  });
 }
 
 initialiseEvents();
