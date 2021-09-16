@@ -29,3 +29,24 @@ function changeBgColorOnHover(e) {
   const gridHovered = e.currentTarget;
   gridHovered.classList.add('grid-square-enter');
 }
+
+/**
+ * Reset grid
+ */
+function resetGrid() {
+  const divSketch = document.querySelector('#container-sketch');
+  while (divSketch.firstChild) {
+    divSketch.removeChild(divSketch.firstChild);
+  }
+  makeGrid();
+}
+
+/**
+ * Initialise event listeners for buttons
+ */
+function initialiseEvents() {
+  const btnReset = document.querySelector('#btn-reset');
+  btnReset.addEventListener('click', (e) => {e.preventDefault(); resetGrid()});
+}
+
+initialiseEvents();

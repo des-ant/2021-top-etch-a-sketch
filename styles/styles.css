@@ -1,3 +1,10 @@
+/* Variables to define grid size */
+:root {
+  --rowNum: 16;
+  --colNum: 16;
+  --containerSketchWidth: 500px;
+}
+
 #container-root {
   display: flex;
   flex-direction: column;
@@ -7,18 +14,25 @@
 
 #container-sketch {
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-template-rows: repeat(16, 1fr);
+  grid-template-columns: repeat(var(--colNum), 1fr);
+  grid-template-rows: repeat(var(--rowNum), 1fr);
   box-sizing: border-box;
+  width: var(--containerSketchWidth);
+  height: var(--containerSketchWidth);
 }
 
 .grid-square {
-  width: 30px;
-  height: 30px;
+  grid-column-start: auto;
+  grid-row-start: auto;
   background-color: white;
   outline: 1px solid black;
 }
 
 .grid-square-enter {
   background-color: black;
+}
+
+#btn-reset {
+  margin: 0 0 20px 0;
+  padding: 5px;
 }
