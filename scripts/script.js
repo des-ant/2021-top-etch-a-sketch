@@ -58,8 +58,15 @@ function resetGrid() {
   while (divSketch.firstChild) {
     divSketch.removeChild(divSketch.firstChild);
   }
-  // Get input for number of squares per side for new grid
-  const numSquares = parseInt(prompt("How many squares per side?"));
+  // Get and validate input for number of squares per side for new grid
+  // Reset grid if user clicks cancel
+  let numSquaresInput = prompt("How many squares per side?\nPlease enter a number between 0 and 100");
+  while (numSquaresInput !== null && isNaN(parseInt(numSquaresInput)) ||
+    parseInt(numSquaresInput) < 0 || parseInt(numSquaresInput) > 100
+  ) {
+    numSquaresInput = prompt("How many squares per side?\nPlease enter a number between 0 and 100");
+  }
+  const numSquares = parseInt(numSquaresInput);
 
   makeGrid(numSquares);
 }
