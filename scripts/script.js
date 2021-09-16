@@ -1,5 +1,6 @@
 /**
  * Adds 16*16 grid of square divs to DOM
+ * @param  {number} [numSquares] Number of squares per side in grid
  */
 function makeGrid(numSquares) {
   // Access CSS variables for grid columns and rows
