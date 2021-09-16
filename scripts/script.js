@@ -3,11 +3,29 @@
  */
 function makeGrid() {
   const divSketch = document.querySelector('#container-sketch');
-  // Create square div
-  const divSquare = document.createElement('div');
-  divSquare.classList.add('grid-square');
-  divSketch.appendChild(divSquare);
+  for (let i = 0; i < 16; i++) {
+    for (let j = 0; j < 16; j++) {
+      // Create square div
+      const divSquare = document.createElement('div');
+      divSquare.classList.add('grid-square');
+
+      // Change color of square when mouse hovers over
+      divSquare.addEventListener('mouseenter', (e) => changeBgColorOnHover(e));
+
+      // Add to sketch container div
+      divSketch.appendChild(divSquare);
+    }
+  }
 }
 
 // Make 16*16 grid on load
 makeGrid();
+
+/**
+ * Change color of div on when mouse hovers over it
+ * @param  {event} e Mouse enter event
+ */
+function changeBgColorOnHover(e) {
+  const gridHovered = e.currentTarget;
+  gridHovered.classList.add('grid-square-enter');
+}
